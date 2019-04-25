@@ -9,8 +9,9 @@
 
 using namespace std;
 //class used
+int acno;
 class account
-{
+{   
     int acno;
     char year;
     char name[50];
@@ -72,7 +73,7 @@ void account::create_account()
 }
 void account::report() const
 {
- cout<<acno<<setw(2)<<" "<<name<<setw(2)<<" "<<year<<setw(2)<<num<<ooc<<stay<<entry<<ex;
+ cout<<acno<<setw(10)<<" "<<name<<setw(2)<<" "<<year<<setw(2)<<num<<ooc<<stay<<entry<<ex;
 }
 int account::retacno() const
 {
@@ -86,7 +87,7 @@ int account::retnum() const{
     return num;
 }
 int account::retstay() const{
-    return
+    return stay;
 }
 
        
@@ -215,7 +216,7 @@ void delete_account(int n)
 //****************************************************************
 
 void display_all()
-{
+{system("cls");
  account ac;
  ifstream inFile;
  inFile.open("account.dat",ios::binary);
@@ -233,6 +234,7 @@ void display_all()
   ac.report();
  }
  inFile.close();
+ system("pause");
 }
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 void greentext(){SetConsoleTextAttribute(hConsole, 2);  };
@@ -445,6 +447,7 @@ void memberDetails(){
 
 }
 void mainMenu(){
+    int num;
 
     int menuchoice;
     system ("cls");
@@ -478,7 +481,8 @@ void mainMenu(){
             memberDetails();
             break;
         case 4 :
-             billpayment();
+        cout<<"\n\n\tEnter The account No. : "; cin>>num;
+             delete_account(num);
             break;
         case 5 :
             help();
