@@ -86,7 +86,7 @@ int account::retnum() const{
     return num;
 }
 int account::retstay() const{
-    return stay;
+    return
 }
 
        
