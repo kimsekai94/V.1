@@ -5,6 +5,7 @@
 #include <sstream>
 #include <fstream>
 #include <string>
+#include<iomanip>
 
 using namespace std;
 //class used
@@ -22,6 +23,12 @@ class account
     public:
         void create_account(); //function to get data from user
         void show_account() const; //function to show data on screen
+        void report() const;
+        int retacno() const;
+        char retyear() const;
+        int retnum() const;
+        int retstay() const;
+       
         void Showbillpayment();
         void Showbillpaymentscript();
         void billpayment();
@@ -39,13 +46,17 @@ class account
 };
 
 void account::create_account()
-{
+{system ("cls");
+ cout<<"\t\t=============================================\n";
+ cout<<"\t\t             Fill Up The Form\n";
+ cout<<"\t\t=============================================\n";
  cout<<"\nRetype Room Number:";
  cin>>acno;
  cout<<"\n\nEnter  Name: ";
  cin.ignore();
  cin.getline(name,50);
  cout<<"\nEnter Age: ";
+ cin.ignore();
  cin>>year;
  cout<<"\nEnter Phone Number: ";
  cin>>num;
@@ -57,9 +68,172 @@ void account::create_account()
  cin>>entry;
  cout<<"\nEnter EXit Date(DD-MM-YY):";
  cin>>ex;
- cout<<"\n\n\nThis Room Has Been Booked for "<<stay<<" days";
+ cout<<"\n\n\nThis Room Has Been Booked for "<<stay<<" days\n\t\t\t";
+}
+void account::report() const
+{
+ cout<<acno<<setw(2)<<" "<<name<<setw(2)<<" "<<year<<setw(2)<<num<<ooc<<stay<<entry<<ex;
+}
+int account::retacno() const
+{
+ return acno;
 }
 
+char account::retyear() const{
+    return year;
+}
+int account::retnum() const{
+    return num;
+}
+int account::retstay() const{
+    return stay;
+}
+
+       
+void account::show_account() const
+{
+ cout<<"\nAccount No. : "<<acno;
+ cout<<"\nAccount Holder Name : ";
+ cout<<name;
+ cout<<"\nType of Account : "<<year;
+ cout<<"\nBalance amount : "<<num;
+}
+
+
+//***************************************************************
+//     function to write in file
+//****************************************************************
+
+void write_account()
+{
+ account ac;
+ ofstream outFile;
+ outFile.open("account.dat",ios::binary|ios::app);
+ ac.create_account();
+ outFile.write(reinterpret_cast<char *> (&ac), sizeof(account));
+ outFile.close();
+}
+//***************************************************************
+//     function to read specific record from file
+//****************************************************************
+void display_sp(int n)
+{system ("cls");
+ account ac;
+ bool flag=false;
+ ifstream inFile;
+ inFile.open("account.dat",ios::binary);
+ if(!inFile)
+ {
+  cout<<"File could not be open !! Press any Key...";
+  return;
+ }
+ cout<<"\nBALANCE DETAILS\n";
+
+     while(inFile.read(reinterpret_cast<char *> (&ac), sizeof(account)))
+ {
+  if(ac.retacno()==n)
+  {
+   ac.show_account();
+   flag=true;
+  }
+ }
+ inFile.close();
+ if(flag==false)
+  cout<<"\n\nAccount number does not exist";
+  system ("pause");
+}
+
+//***************************************************************
+//     function to modify record of file
+//****************************************************************
+
+/*void modify_account(int n)
+{
+ bool found=false;
+ account ac;
+ fstream File;
+ File.open("account.dat",ios::binary|ios::in|ios::out);
+ if(!File)
+ {
+  cout<<"File could not be open !! Press any Key...";
+  return;
+ }
+ while(!File.eof() && found==false)
+ {
+  File.read(reinterpret_cast<char *> (&ac), sizeof(account));
+  if(ac.retacno()==n)
+  {
+   ac.show_account();
+   cout<<"\n\nEnter The New Details of account"<<endl;
+   ac.modify();
+   int pos=(-1)*static_cast<int>(sizeof(account));
+   File.seekp(pos,ios::cur);
+   File.write(reinterpret_cast<char *> (&ac), sizeof(account));
+   cout<<"\n\n\t Record Updated";
+   found=true;
+    }
+ }
+ File.close();
+ if(found==false)
+  cout<<"\n\n Record Not Found ";
+}*/
+
+//***************************************************************
+//     function to delete record of file
+//****************************************************************
+
+
+void delete_account(int n)
+{
+ account ac;
+ ifstream inFile;
+ ofstream outFile;
+ inFile.open("account.dat",ios::binary);
+ if(!inFile)
+ {
+  cout<<"File could not be open !! Press any Key...";
+  return;
+ }
+ outFile.open("Temp.dat",ios::binary);
+ inFile.seekg(0,ios::beg);
+ while(inFile.read(reinterpret_cast<char *> (&ac), sizeof(account)))
+ {
+  if(ac.retacno()!=n)
+  {
+   outFile.write(reinterpret_cast<char *> (&ac), sizeof(account));
+  }
+ }
+ inFile.close();
+ outFile.close();
+ remove("account.dat");
+ rename("Temp.dat","account.dat");
+ cout<<"\n\n\tRecord Deleted ..";
+}
+
+//***************************************************************
+//     function to display all accounts deposit list
+//****************************************************************
+
+void display_all()
+{
+ account ac;
+ ifstream inFile;
+ inFile.open("account.dat",ios::binary);
+ if(!inFile)
+ {
+  cout<<"File could not be open !! Press any Key...";
+  return;
+ }
+ cout<<"\n\n\t\t ROOM RECORD\n\n";
+ cout<<"==================================================================================================================================\n";
+ cout<<"Room no.      NAME           Age            Phone          Occupation                 Days          Entry Date      EXit Date\n";
+ cout<<"==================================================================================================================================\n";
+ while(inFile.read(reinterpret_cast<char *> (&ac), sizeof(account)))
+ {
+  ac.report();
+ }
+ inFile.close();
+}
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 void greentext(){SetConsoleTextAttribute(hConsole, 2);  };
 void whitetext(){SetConsoleTextAttribute(hConsole, 15);  };
@@ -102,6 +276,7 @@ double ParkingSpot = 20.00;
 double HighSpeedInternet = 50.00;
 double FitnessRoom = 20.00;
 double Breakfast = 50.00;
+int numroom[9]={101,102,103,201,202,203,301,302,303};
 string availble = "Yes";
 string bookedfor = "N/A Days";
 string entrydate = "N/A";
@@ -253,16 +428,17 @@ void roombooking(){
     system ("cls");
     cout << "\t\t\t\t\t\t\t\t\tOur rooms\n\n";
     cout << "\t\tRoom No\t\t    Category\t\t Availble\t\t Booked for\t\t Entry Date\t\t Exit Date";
-    cout << "\n\n\t\t  101    \x9c\t  "<<"Standard Studio" <<"\t     " << availble <<"\t\t    " << bookedfor<<"\t\t      " << entrydate<<"\t\t     " << exitdate;
-    cout << "\n\n\t\t  102    \x9c\t  "<<"Standard Studio" <<"\t     " << availble <<"\t\t    " << bookedfor<<"\t\t      " << entrydate<<"\t\t     " << exitdate;
-    cout << "\n\n\t\t  103    \x9c\t  "<<"Standard Studio" <<"\t     " << availble <<"\t\t    " << bookedfor<<"\t\t      " << entrydate<<"\t\t     " << exitdate;
-    cout << "\n\n\t\t  201    \x9c\t  "<<"Deluxe Studio" <<"\t\t     " <<availble<< "\t\t    " << bookedfor<<"\t\t      " << entrydate<<"\t\t     " << exitdate;
-    cout << "\n\n\t\t  202    \x9c\t  "<<"Deluxe Studio" <<"\t\t     " <<availble<< "\t\t    " << bookedfor<<"\t\t      " << entrydate<<"\t\t     " << exitdate;
-    cout << "\n\n\t\t  203    \x9c\t  "<<"Deluxe Studio" <<"\t\t     " <<availble<< "\t\t    " << bookedfor<<"\t\t      " << entrydate<<"\t\t     " << exitdate;
-    cout << "\n\n\t\t  301    \x9c\t  "<<"Standard Family"<<"\t     " <<availble<< "\t\t    " << bookedfor<<"\t\t      " << entrydate<<"\t\t     " << exitdate;
-    cout << "\n\n\t\t  302    \x9c\t  "<<"Standard Family"<<"\t     " <<availble<< "\t\t    " << bookedfor<<"\t\t      " << entrydate<<"\t\t     " << exitdate;
-    cout << "\n\n\t\t  303    \x9c\t  "<<"Standard Family"<<"\t     " <<availble<< "\t\t    " << bookedfor<<"\t\t      " << entrydate<<"\t\t     " << exitdate<<"\n\n";
-      cout << "\t\t\t\t\t\t\t\tWhich Room You Want To Book:";cin >>selectroom;
+    cout << "\n\n\t\t  "<<numroom[0]<<"    \x9c\t  "<<"Standard Studio" <<"\t     " << availble <<"\t\t    " << bookedfor<<"\t\t      " << entrydate<<"\t\t     " << exitdate;
+    cout << "\n\n\t\t  "<<numroom[1]<<"    \x9c\t  "<<"Standard Studio" <<"\t     " << availble <<"\t\t    " << bookedfor<<"\t\t      " << entrydate<<"\t\t     " << exitdate;
+    cout << "\n\n\t\t  "<<numroom[2]<<"    \x9c\t  "<<"Standard Studio" <<"\t     " << availble <<"\t\t    " << bookedfor<<"\t\t      " << entrydate<<"\t\t     " << exitdate;
+    cout << "\n\n\t\t  "<<numroom[3]<<"    \x9c\t  "<<"Deluxe Studio" <<"\t\t     " <<availble<< "\t\t    " << bookedfor<<"\t\t      " << entrydate<<"\t\t     " << exitdate;
+    cout << "\n\n\t\t  "<<numroom[4]<<"    \x9c\t  "<<"Deluxe Studio" <<"\t\t     " <<availble<< "\t\t    " << bookedfor<<"\t\t      " << entrydate<<"\t\t     " << exitdate;
+    cout << "\n\n\t\t  "<<numroom[5]<<"    \x9c\t  "<<"Deluxe Studio" <<"\t\t     " <<availble<< "\t\t    " << bookedfor<<"\t\t      " << entrydate<<"\t\t     " << exitdate;
+    cout << "\n\n\t\t  "<<numroom[6]<<"    \x9c\t  "<<"Standard Family"<<"\t     " <<availble<< "\t\t    " << bookedfor<<"\t\t      " << entrydate<<"\t\t     " << exitdate;
+    cout << "\n\n\t\t  "<<numroom[7]<<"    \x9c\t  "<<"Standard Family"<<"\t     " <<availble<< "\t\t    " << bookedfor<<"\t\t      " << entrydate<<"\t\t     " << exitdate;
+    cout << "\n\n\t\t  "<<numroom[8]<<"    \x9c\t  "<<"Standard Family"<<"\t     " <<availble<< "\t\t    " << bookedfor<<"\t\t      " << entrydate<<"\t\t     " << exitdate<<"\n\n";
+      cout << "\t\t\t\t\t\t\t\tWhich Room You Want To Book:";cin >>numroom[9];
+    write_account();
     system ("pause");
 }
 void memberDetails(){
@@ -276,8 +452,8 @@ void mainMenu(){
     bluetext();
     cout << "\t\t\t\tMain Menu\n\n";
     whitetext();
-    cout << "\t\t1 - Romm bookig\n\n";
-    cout << "\t\t2 - View price list\n\n";
+    cout << "\t\t1 - Room bookig\n\n";
+    cout << "\t\t2 - View Room Record \n\n";
     resetBookingDetails();
     cout << "\t\t3 - Create a new booking\n\n";
     whitetext();
@@ -296,7 +472,7 @@ void mainMenu(){
             roombooking();
             break;
         case 2 :
-            priceList();
+            display_all();
             break;
         case 3 :
             memberDetails();
