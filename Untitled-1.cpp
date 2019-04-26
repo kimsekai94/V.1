@@ -177,7 +177,6 @@ void HotelMgnt::checkIn(){
         cout<<"\n\t\tEnter Check Out Date (DD-MM-YY): ";
         cin>>rooms[i].cust.to_date;
 
-
         cout<<"\n\t\tEnter Advance Payment (This is discount)\n\t\tthe first time = discount 100 baht\n\t\tthe second time = discount 50 baht\n\t\tthe many time = discount 25 baht  : ";
         cin>>rooms[i].cust.payment_advance;
 
