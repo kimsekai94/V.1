@@ -581,7 +581,7 @@ void welcome(){
     cout <<       "\t\t\t\t|  *                                           *  |\n";
     cout <<       "\t\t\t\t|  *                                           *  |\n";
     cout <<       "\t\t\t\t|  *                WELCOME to                 *  |\n";
-    cout <<       "\t\t\t\t|  *              La-lune-hotel                *  |\n";
+    cout <<       "\t\t\t\t|  *                MAJA hotel                 *  |\n";
     cout <<       "\t\t\t\t|  *                                           *  |\n";
     cout <<       "\t\t\t\t|  *                                           *  |\n";
     cout <<       "\t\t\t\t|  *                                           *  |\n";
