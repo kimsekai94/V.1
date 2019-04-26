@@ -2,6 +2,7 @@
 #include<string.h>
 #include<conio.h>
 #include<windows.h>
+#include<iomanip>
 
 #define max 100
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -13,6 +14,10 @@ void yellowtext(){SetConsoleTextAttribute(hConsole, 14);  };
 void darktext(){SetConsoleTextAttribute(hConsole, 8);  };
 using namespace std;
 
+bool Menupricelist = true;
+bool Menuhelp = true;
+int number;
+int help;
 //Class Customer
 class Customer
 {
@@ -329,6 +334,109 @@ void manageRooms()
             }
             }while(opt!=3);
 }
+void mainofpricelist(){
+    
+    system ("cls");
+    cout << "\t\tView of pricelist\n\n";
+    cout << "1 - Detail of Room\n\n";
+    cout << "2 - Back to Main menu\n\n";
+    cout << "Please select a number of page: ";
+    cin >> number;
+
+     
+}
+
+void backtomainmenu(){
+    Menupricelist == false;
+}
+void priceList(){
+    
+    mainofpricelist();
+    switch(number){
+        case 1:
+
+    system ("cls");
+   
+    cout << "\tPrice List\n\n";
+ 
+    cout << "\t\t\t\t\tDetail of Rooms\n\n\t";
+
+    cout << "\t\tRoom No\t\t    AC/Non-AC \t\t   Single/Double\t\t   Big/Small \t\t   Price";
+    cout << "\n\n\t\t\t  101      \x9c\t\t  "<<"AC"<<setw(26)<<"Single" <<setw(29)<<"Big"<<setw(22)<<"4000 "<<"Baht";
+    cout << "\n\n\t\t\t  102      \x9c\t\t  "<<"AC"<<setw(26)<<"Single" <<setw(29)<<"Big"<<setw(22)<<"4000 "<<"Baht";
+    cout << "\n\n\t\t\t  103      \x9c\t\t  "<<"AC"<<setw(26)<<"Single" <<setw(29)<<"Small"<<setw(22)<<"3000 "<<"Baht";
+    cout << "\n\n\t\t\t  104      \x9c\t\t  "<<"AC"<<setw(26)<<"Single" <<setw(29)<<"Small"<<setw(22)<<"3000 "<<"Baht";
+    cout << "\n\n\t\t\t  201      \x9c\t\t  "<<"AC"<<setw(26)<<"Double" <<setw(29)<<"Big"<<setw(22)<<"6000 "<<"Baht";
+    cout << "\n\n\t\t\t  202      \x9c\t\t  "<<"AC"<<setw(26)<<"Double" <<setw(29)<<"Big"<<setw(22)<<"6000 "<<"Baht";
+    cout << "\n\n\t\t\t  203      \x9c\t\t  "<<"AC"<<setw(26)<<"Double" <<setw(29)<<"Small"<<setw(22)<<"5000 "<<"Baht";
+    cout << "\n\n\t\t\t  204      \x9c\t\t  "<<"AC"<<setw(26)<<"Double" <<setw(29)<<"Small"<<setw(22)<<"5000 "<<"Baht";
+    cout << "\n\n\t\t\t  301      \x9c\t  "<<setw(12)<<"Non-AC"<<setw(24)<<"Single" <<setw(29)<<"Big"<<setw(22)<<"3500 "<<"Baht";
+    cout << "\n\n\t\t\t  302      \x9c\t  "<<setw(12)<<"Non-AC"<<setw(24)<<"Single" <<setw(29)<<"Big"<<setw(22)<<"3500 "<<"Baht";
+    cout << "\n\n\t\t\t  303      \x9c\t  "<<setw(12)<<"Non-AC"<<setw(24)<<"Single" <<setw(29)<<"Small"<<setw(22)<<"2500 "<<"Baht";
+    cout << "\n\n\t\t\t  304      \x9c\t  "<<setw(12)<<"Non-AC"<<setw(24)<<"Single" <<setw(29)<<"Small"<<setw(22)<<"2500 "<<"Baht";
+    cout << "\n\n\t\t\t  401      \x9c\t  "<<setw(12)<<"Non-AC"<<setw(24)<<"Double" <<setw(29)<<"Big"<<setw(22)<<"5500 "<<"Baht";
+    cout << "\n\n\t\t\t  402      \x9c\t  "<<setw(12)<<"Non-AC"<<setw(24)<<"Double" <<setw(29)<<"Big"<<setw(22)<<"5500 "<<"Baht";
+    cout << "\n\n\t\t\t  403      \x9c\t  "<<setw(12)<<"Non-AC"<<setw(24)<<"Double" <<setw(29)<<"Small"<<setw(22)<<"4500 "<<"Baht";
+    cout << "\n\n\t\t\t  404      \x9c\t  "<<setw(12)<<"Non-AC"<<setw(24)<<"Double" <<setw(29)<<"Small"<<setw(22)<<"4500 "<<"Baht\n\n";
+   
+    system ("pause");
+    mainofpricelist();
+    
+    
+        case 2:
+    backtomainmenu();
+    }
+
+
+ 
+
+}
+void backtomainmenu1(){
+    Menuhelp == false;
+}
+void mainofhelp(){
+    
+    system ("cls");
+    cout << "\t\tView of help\n\n";
+    cout << "1 - help\n\n";
+    cout << "2 - Back to Main menu\n\n";
+    cout << "Please select a number of page: ";
+    cin >> help;
+
+     
+}
+void helps(){
+    mainofhelp();
+    
+    switch(help){
+        case 1:
+        system ("cls");
+        cout << "\t\t\t\tHelp\n\n";
+ 
+        cout << "To enter a new member into the system, Choose option 1 from the Main Menu.\n";
+        cout << "Enter the new members details into the membership form and press Y to save once finished.\n\n\n";
+
+        cout << "To view a price list, select option 2 from the main menu.\n\n\n";
+        
+        cout << "To create a new booking, select option 3 from the main menu.\n";
+        cout << "Enter the booking choices and then press Y to save the booking\n";
+        cout << "After create a new booking, can view detail of booking by typing the name of a file as it\n";
+        cout << "is displayed on the list to open and view it.\n\n\n";
+        
+        cout << "To view a bill payment, choose option 4 from the main menu\n";
+        cout << "To open a member or booking file, choose option 3 at the main menu.\n";
+        cout << "Type the name of a file as it is displayed on the list to open and view it.\n\n\n";
+    system ("pause");
+    mainofhelp();
+    
+ case 2:
+    backtomainmenu1();
+    }
+    }
+
+ 
+
+ 
 
 void welcome();
 int main(){
@@ -344,6 +452,8 @@ int main(){
             bluetext();
             cout << "\t\t\t\tMain Menu\n\n";
             whitetext();
+            cout<<"\n\t\t\t0 - View Price Room";
+            cout<<endl;
             cout<<"\n\t\t\t1 - Manage Rooms";
             cout<<endl;
             cout<<"\n\t\t\t2 - Check-In Room";
@@ -356,11 +466,16 @@ int main(){
             cout<<endl;
             cout<<"\n\t\t\t6 - Guest Summary Report";
             cout<<endl;
-            cout<<"\n\t\t\t7 - Exit";
+            cout<<"\n\t\t\t7 - Help";
+            cout<<endl;
+            cout<<"\n\t\t\t8 - Exit";
             cout<<endl;
             cout<<"\n\n\t\t\tPlease choose an option : ";
             cin>>opt;
             switch(opt){
+                case 0:
+                    priceList();
+                    break;
                 case 1:
                     manageRooms();
                     break;
@@ -412,6 +527,9 @@ int main(){
                     hm.guestSummaryReport(); 
                     break;
                 case 7:
+                    helps();
+                    break;
+                case 8:
                     greentext();
                     cout<<"\n\t\tTHANK YOU! FOR RESERVATION";
                     break;
