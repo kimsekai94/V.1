@@ -230,16 +230,21 @@ void HotelMgnt::checkIn(){
 
         do{
             cout<<"\n\t\tEnter  your Type of Creditcard : ";
+            cout<<"\n\t\t\t[1] GSB (- 90 % )";
+            cout<<"\n\t\t\t[2] KTB (- 85 % )";
+            cout<<"\n\t\t\t[3] SCB (- 60 % )";
+            cout<<"\n\t\t\t[4] No Creditcard ";
+            cout<<"\n\t\tEnter  your Type of Creditcard : ";
             cin>>j;
-            if (j == "GSB"){
+            if (j == "1"){
                 rooms[i].cust.payment_advance = 0.9; };
-            if (j == "KTB"){
+            if (j == "2"){
                 rooms[i].cust.payment_advance = 0.85; };
-            if (j == "SCB"){
+            if (j == "3"){
                 rooms[i].cust.payment_advance = 0.6; };
-            if (j == "No"){
+            if (j == "4"){
                 rooms[i].cust.payment_advance = 1.0; };
-        }while (j!= "GSB" && j!= "KTB" && j!= "SCB" && j!= "No" );
+        }while (j!= "1" && j!= "2" && j!= "3" && j!= "4" );
       
         
         
@@ -386,7 +391,6 @@ void manageRooms()
             room.searchRoom(rno);
             break;
         case 3:
-            //nothing to do
             break;
             default:
             cout<<"\n\t\tPlease Enter correct option";
@@ -457,101 +461,118 @@ void welcome();
 int main(){
      srand(time(0));
      class HotelMgnt hm;
-     int i,j,opt,rno;
+     int i,j,opt1,opt2,rno,pass;
      char ch;
      char pname[100];
      welcome();
      system("cls");
-
+     yellowtext();
      do{
-            system("cls");
-            bluetext();
-            cout << "\t\t\t\tMain Menu\n\n";
-            whitetext();
-            cout<<"\n\t\t\t0 - View Price Room";
-            cout<<endl;
-            cout<<"\n\t\t\t1 - Manage Rooms";
-            cout<<endl;
-            cout<<"\n\t\t\t2 - Check-In Room";
-            cout<<endl;
-            cout<<"\n\t\t\t3 - Available Rooms";
-            cout<<endl;
-            cout<<"\n\t\t\t4 - Search Customer";
-            cout<<endl;
-            cout<<"\n\t\t\t5 - Check-Out Room";
-            cout<<endl;
-            /*cout<<"\n\t\t\t6 - Guest Summary Report";
-            cout<<endl;*/
-            cout<<"\n\t\t\t6 - Exit";
-            cout<<endl;
-            cout<<"\n\n\t\t\tPlease choose an option : ";
-            cin>>opt;
-            switch(opt){
-                case 0:
-                    priceList();
-                    break;
-                case 1:
-                    manageRooms();
-                    break;
-                case 2:
-                    if(count==0){
-                        redtext();
-                        cout<<"\n\t\tRooms data is not available.";
-                        greentext();
-                        cout<<"\n\t\tPlease add the rooms first.";
-                        getch();
-                    }else hm.checkIn();
-                    break;
-                case 3:
-                    if(count==0){
-                        redtext();
-                        cout<<"\n\t\tRooms data is not available.";
-                        greentext();
-                        cout<<"\n\t\tPlease add the rooms first.";
-                        getch();
-                    }else hm.getAvailRoom();
-                    break;
-                case 4:
-                    if(count==0) {
-                        redtext();
-                        cout<<"\n\t\tRooms data is not available.";
-                        greentext();
-                        cout<<"\n\t\tPlease add the rooms first.";
-                        getch();
-                    }else{
-                        cout<<"\t\tEnter Customer Name: ";
-                        cin>>pname;
-                        hm.searchCustomer(pname);
-                    }
-                    break;
-                case 5:
-                    if(count==0){
-                        redtext();
-                        cout<<"\n\t\tRooms data is not available.";
-                        greentext();
-                        cout<<"\n\t\tPlease add the rooms first.";
-                        getch();
-                    }else{
-                        cout<<"\t\tEnter Room Number : ";
-                        cin>>rno;
-                        hm.checkOut(rno);
-                    }
-                    break;
-               /* case 6:
-                    hm.guestSummaryReport(); 
-                    break;*/
-                case 6:
-                    greentext();
-                    cout<<"\n\t\tTHANK YOU! FOR RESERVATION";
-                    break;
-                    default:
-                    cout<<"\n\t\tPlease Enter correct option";
-                    break;
-            }
-            }while(opt!=6);
+        cout << "\t\t\t\t[1] Staff\n\n";
 
-             getch();
+        cout << "\t\t\t\t[2] Customer\n\n";
+
+        cout<<"\n\n\t\t\tPlease choose an option : ";
+        cin>>opt1;
+
+        switch(opt1){
+            case 1:
+            system("cls");
+            cout << "\t\t\t\tEnter password : ";
+            cin >> pass;
+            if(pass == 12345678){
+                manageRooms();
+                    break; }
+
+            case 2:
+            do{
+                system("cls");
+                bluetext();
+                cout << "\t\t\t\tMain Menu\n\n";
+                whitetext();
+                cout<<"\n\t\t\t1 - View Price Room";
+                cout<<endl;
+                cout<<"\n\t\t\t2 - Check-In Room";
+                cout<<endl;
+                cout<<"\n\t\t\t3 - Available Rooms";
+                cout<<endl;
+                cout<<"\n\t\t\t4 - Search Customer";
+                cout<<endl;
+                cout<<"\n\t\t\t5 - Check-Out Room";
+                cout<<endl;
+                cout<<"\n\t\t\t6 - Exit";
+                cout<<endl;
+                cout<<"\n\n\t\t\tPlease choose an option : ";
+                cin>>opt2;
+                switch(opt2){
+                    case 1:
+                        priceList();
+                        break;
+                    case 2:
+                        if(count==0){
+                            redtext();
+                            cout<<"\n\t\tRooms data is not available.";
+                            greentext();
+                            cout<<"\n\t\tPlease add the rooms first.";
+                            getch();
+                        }else hm.checkIn();
+                        break;
+                    case 3:
+                        if(count==0){
+                            redtext();
+                            cout<<"\n\t\tRooms data is not available.";
+                            greentext();
+                            cout<<"\n\t\tPlease add the rooms first.";
+                            getch();
+                        }else hm.getAvailRoom();
+                        break;
+                    case 4:
+                        if(count==0) {
+                            redtext();
+                            cout<<"\n\t\tRooms data is not available.";
+                            greentext();
+                            cout<<"\n\t\tPlease add the rooms first.";
+                            getch();
+                        }else{
+                            cout<<"\t\tEnter Customer Name: ";
+                            cin>>pname;
+                            hm.searchCustomer(pname);
+                        }
+                        break;
+                    case 5:
+                        if(count==0){
+                            redtext();
+                            cout<<"\n\t\tRooms data is not available.";
+                            greentext();
+                            cout<<"\n\t\tPlease add the rooms first.";
+                            getch();
+                        }else{
+                            cout<<"\t\tEnter Room Number : ";
+                            cin>>rno;
+                            hm.checkOut(rno);
+                        }
+                        break;
+                    case 6:
+                        greentext();
+                        cout<<"\n\t\tTHANK YOU! FOR RESERVATION";
+                        break;
+                        default:
+                        cout<<"\n\t\tPlease Enter correct option";
+                        break;
+            }
+
+        }while(opt2 != 6 && opt2 != 1 && opt2 != 2 && opt2 != 4 && opt2 != 5 && opt2 != 3);
+     }
+  
+  getch();
+}while(opt1 != 1 && opt1 != 2);
 }
+    
+            
+
+
+
+
 void welcome(){
     bluetext();
     cout << "\n\n\n\t\t\t\t\t\t\t\t---------------------------------------------------\n";
@@ -572,4 +593,5 @@ void welcome(){
     greentext();
     cout << "\t\t\t\t\t\t\t\t      press enter in order to approach Main menu... ";
     cin.get(); 
+
 }
