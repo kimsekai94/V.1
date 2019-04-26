@@ -149,7 +149,8 @@ void HotelMgnt::guestSummaryReport(){
 void HotelMgnt::checkIn(){
     system("cls");
 
-    int i,found=0,rno,j,k;
+    int i,found=0,rno,k;
+    string j;
     char Parking ; 
     char gym;
     double parkingCost;
@@ -227,21 +228,20 @@ void HotelMgnt::checkIn(){
 
         rooms[i].cust.ServiceCharge = parkingCost + gymCost;
 
-        cout<<"\n\t\t[1].the first time = discount 30 baht\n\t\t[2].the second time = discount 50 baht\n\t\t[3].the many time = discount 125 baht \n\t\tEnter Advance Payment (This is discount) : ";
-        cin>>j;
-        switch(j){
-
-            case 1:
-
-            rooms[i].cust.payment_advance = 30;
-
-            case 2:
-
-            rooms[i].cust.payment_advance = 50;
-
-            case 3:
-            rooms[i].cust.payment_advance = 125;
-        }
+        do{
+            cout<<"\n\t\tEnter  your Type of Creditcard : ";
+            cin>>j;
+            if (j == "GSB"){
+                rooms[i].cust.payment_advance = 0.9; };
+            if (j == "KTB"){
+                rooms[i].cust.payment_advance = 0.85; };
+            if (j == "SCB"){
+                rooms[i].cust.payment_advance = 0.6; };
+            if (j == "No"){
+                rooms[i].cust.payment_advance = 1.0; };
+        }while (j!= "GSB" && j!= "KTB" && j!= "SCB" && j!= "No" );
+      
+        
         
 
         rooms[i].status=1;
@@ -331,8 +331,8 @@ void HotelMgnt::checkOut(int roomNum)
             cout<<"\n\t\tEnter Check Out Date (DD-MM-YY): "<<rooms[i].cust.to_date;
             cout<<"\n\t\tTotal ServiceCharge: " << rooms[i].cust.ServiceCharge <<" baht";
             cout<<"\n\t\tTotal Amount Due : "<<billAmount <<" baht";
-            cout<<"\n\t\tAdvance Paid(discount): "<<rooms[i].cust.payment_advance<<" baht";
-            cout<<"\n\t\t*** Total Payable: "<< billAmount-rooms[i].cust.payment_advance<<" baht ";
+            cout<<"\n\t\tAdvance Paid(discount): "<<rooms[i].cust.payment_advance<<" %";
+            cout<<"\n\t\t*** Total Payable: "<< billAmount*rooms[i].cust.payment_advance<<" baht ";
 
             rooms[i].status=0;
         }
