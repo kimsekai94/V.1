@@ -120,6 +120,7 @@ class HotelMgnt:protected Room
 void HotelMgnt::guestSummaryReport(){
 
     if(count==0){
+        redtext();
         cout<<"\n\t\t No Guest in Hotel !!";
     } 
     for(int i=0;i<count;i++){
