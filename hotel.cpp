@@ -575,23 +575,23 @@ int main(){
 
 void welcome(){
     bluetext();
-    cout << "\n\n\n\t\t\t\t\t\t\t\t---------------------------------------------------\n";
-    cout <<       "\t\t\t\t\t\t\t\t|  *********************************************  |\n";
-    cout <<       "\t\t\t\t\t\t\t\t|  *                                           *  |\n";
-    cout <<       "\t\t\t\t\t\t\t\t|  *                                           *  |\n";
-    cout <<       "\t\t\t\t\t\t\t\t|  *                                           *  |\n";
-    cout <<       "\t\t\t\t\t\t\t\t|  *                WELCOME to                 *  |\n";
-    cout <<       "\t\t\t\t\t\t\t\t|  *              La-lune-hotel                *  |\n";
-    cout <<       "\t\t\t\t\t\t\t\t|  *                                           *  |\n";
-    cout <<       "\t\t\t\t\t\t\t\t|  *                                           *  |\n";
-    cout <<       "\t\t\t\t\t\t\t\t|  *                                           *  |\n";
-    cout <<       "\t\t\t\t\t\t\t\t|  *********************************************  |\n";
-    cout <<       "\t\t\t\t\t\t\t\t---------------------------------------------------\n";
+    cout << "\n\n\n\t\t\t\t---------------------------------------------------\n";
+    cout <<       "\t\t\t\t|  *********************************************  |\n";
+    cout <<       "\t\t\t\t|  *                                           *  |\n";
+    cout <<       "\t\t\t\t|  *                                           *  |\n";
+    cout <<       "\t\t\t\t|  *                                           *  |\n";
+    cout <<       "\t\t\t\t|  *                WELCOME to                 *  |\n";
+    cout <<       "\t\t\t\t|  *              La-lune-hotel                *  |\n";
+    cout <<       "\t\t\t\t|  *                                           *  |\n";
+    cout <<       "\t\t\t\t|  *                                           *  |\n";
+    cout <<       "\t\t\t\t|  *                                           *  |\n";
+    cout <<       "\t\t\t\t|  *********************************************  |\n";
+    cout <<       "\t\t\t\t---------------------------------------------------\n";
     whitetext();
-    cout <<       "\n\n\t\t\t\t\t\t\t\t>";
+    cout <<       "\n\n\t\t\t\t            >";
     cout << "   Main menu \n";
     greentext();
-    cout << "\t\t\t\t\t\t\t\t      press enter in order to approach Main menu... ";
+    cout << "\t\t\t\t   press enter in order to approach Main menu... ";
     cin.get(); 
 
 }
