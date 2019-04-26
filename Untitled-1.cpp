@@ -229,9 +229,9 @@ void HotelMgnt::checkIn(){
 
         do{
             cout<<"\n\t\tEnter  your Type of Creditcard : ";
-            cout<<"\n\t\t\t[1] GSB (- 90 % )";
-            cout<<"\n\t\t\t[2] KTB (- 85 % )";
-            cout<<"\n\t\t\t[3] SCB (- 60 % )";
+            cout<<"\n\t\t\t[1] GSB (- 10 % )";
+            cout<<"\n\t\t\t[2] KTB (- 15 % )";
+            cout<<"\n\t\t\t[3] SCB (- 40 % )";
             cout<<"\n\t\t\t[4] No Creditcard ";
             cout<<"\n\t\tEnter  your Type of Creditcard : ";
             cin>>j;
@@ -534,6 +534,7 @@ int main(){
                         cout<<"\t\tEnter Room Number : ";
                         cin>>rno;
                         hm.checkOut(rno);
+                        
                     }
                     break;
                 case 6:
