@@ -26,6 +26,7 @@ class Customer
     char from_date[20];
     char to_date[20];
     float payment_advance;
+    double ServiceCharge;
     int booking_id;
 };
 
@@ -47,7 +48,7 @@ class Room
     void displayRoom(Room);
 };
 
-//Global Declarations
+
 class Room rooms[max];
 int count=0;
 
@@ -108,7 +109,7 @@ void Room::displayRoom(Room tempRoom)
     cout<<"\n\t\tRent : "<<tempRoom.rent;
 }
 
-//hotel management class
+
 class HotelMgnt:protected Room
 {
     public:
@@ -143,10 +144,17 @@ void HotelMgnt::guestSummaryReport(){
     getch();
 }
 
-//hotel management reservation of room
+
 void HotelMgnt::checkIn(){
     system("cls");
-    int i,found=0,rno;
+
+    int i,found=0,rno,k;
+    string j;
+    char Parking ; 
+    char gym;
+    double parkingCost;
+    double gymCost;
+
     class Room room;
     cout<<"\n\t\tEnter Room number : ";
     cin>>rno;
@@ -162,11 +170,13 @@ void HotelMgnt::checkIn(){
             return;
         }
 
-        cout<<"\n\t\tEnter booking id(Number 4 digit): ";
-        cin>>rooms[i].cust.booking_id;
+        cout<<"\n\t\tEnter booking id (Number 4 digit) : ";
+        rooms[i].cust.booking_id =rand()%8999+1000;
+        cout <<  rooms[i].cust.booking_id <<"\n";
 
         cout<<"\n\t\tEnter Customer Name (First Name): ";
-        cin>>rooms[i].cust.name;
+        /*cin>>rooms[i].cust.name;*/
+        cin >> rooms[i].cust.name;
 
         cout<<"\n\t\tEnter Address (only city): ";
         cin>>rooms[i].cust.address;
@@ -180,8 +190,60 @@ void HotelMgnt::checkIn(){
         cout<<"\n\t\tEnter Check Out Date (DD-MM-YY): ";
         cin>>rooms[i].cust.to_date;
 
-        cout<<"\n\t\tEnter Advance Payment (This is discount)\n\t\tthe first time = discount 100 baht\n\t\tthe second time = discount 50 baht\n\t\tthe many time = discount 25 baht  : ";
-        cin>>rooms[i].cust.payment_advance;
+         cout <<"\n\t\tEnter Service : ";
+        do {
+        cout << "\n\t\tDo you want a parking spot during your stay? ";
+        cin >> Parking;
+        if (Parking == 'Y' || Parking == 'y'){
+
+            parkingCost = 20;
+            break;
+        }
+        else if (Parking == 'N' || Parking == 'n'){
+            parkingCost = 0;
+            break;
+        }
+        else{
+            cout << "\n\t\tYou entered an invalid answer. Please enter 'Y' for yes or 'N' for no.\n";
+        }
+        }while (Parking != 'Y' && Parking != 'y' && Parking != 'N' && Parking != 'n');
+        
+        
+        do {
+        cout << "\n\t\tDo you want a high speed internet during your stay? ";
+        cin >> gym;
+        if (gym == 'Y' || gym == 'y'){
+            gymCost = 50;
+            break;
+        }
+        else if (gym == 'N' || gym == 'n'){
+            gymCost = 0;
+            break;
+        }
+        else{
+            cout << "\n\t\tYou entered an invalid answer. Please enter 'Y' for yes or 'N' for no.";
+        } 
+        }while (   gym != 'Y' && gym != 'y' && gym != 'N' && gym != 'n');
+
+        rooms[i].cust.ServiceCharge = parkingCost + gymCost;
+
+        do{
+            cout<<"\n\t\tEnter  your Type of Creditcard : ";
+            cout<<"\n\t\t\t[1] GSB (- 90 % )";
+            cout<<"\n\t\t\t[2] KTB (- 85 % )";
+            cout<<"\n\t\t\t[3] SCB (- 60 % )";
+            cout<<"\n\t\t\t[4] No Creditcard ";
+            cout<<"\n\t\tEnter  your Type of Creditcard : ";
+            cin>>j;
+            if (j == "1"){
+                rooms[i].cust.payment_advance = 0.9; };
+            if (j == "2"){
+                rooms[i].cust.payment_advance = 0.85; };
+            if (j == "3"){
+                rooms[i].cust.payment_advance = 0.6; };
+            if (j == "4"){
+                rooms[i].cust.payment_advance = 1.0; };
+        }while (j!= "1" && j!= "2" && j!= "3" && j!= "4" );
 
         rooms[i].status=1;
         greentext();
@@ -193,7 +255,7 @@ void HotelMgnt::checkIn(){
 }
 
 
-//hotel management shows available rooms
+
 void HotelMgnt::getAvailRoom(){
     system("cls");
     int i,found=0;
@@ -215,7 +277,7 @@ void HotelMgnt::getAvailRoom(){
 }
 
 
-//hotel management shows all persons that have booked room
+
 void HotelMgnt::searchCustomer(char *pname){
     system("cls");
         int i,found=0;
@@ -238,7 +300,7 @@ void HotelMgnt::searchCustomer(char *pname){
 }
 
 
-//hotel managemt generates the bill of the expenses
+
 void HotelMgnt::checkOut(int roomNum)
 {       system("cls");
         int i,found=0,days,rno;
@@ -268,9 +330,10 @@ void HotelMgnt::checkOut(int roomNum)
             cout<<"\n\t\tPhone : "<<rooms[i].cust.phone;
             cout<<"\n\t\tEnter Check In Date (DD-MM-YY): "<<rooms[i].cust.from_date;
             cout<<"\n\t\tEnter Check Out Date (DD-MM-YY): "<<rooms[i].cust.to_date;
-            cout<<"\n\t\tTotal Amount Due : "<<billAmount<<" baht";
-            cout<<"\n\t\tAdvance Paid(discount): "<<rooms[i].cust.payment_advance<<" baht";
-            cout<<"\n\t\t*** Total Payable: "<<billAmount-rooms[i].cust.payment_advance<<" baht ";
+            cout<<"\n\t\tTotal ServiceCharge: " << rooms[i].cust.ServiceCharge <<" baht";
+            cout<<"\n\t\tTotal Amount Due : "<<billAmount <<" baht";
+            cout<<"\n\t\tAdvance Paid(discount): "<<rooms[i].cust.payment_advance<<" %";
+            cout<<"\n\t\t*** Total Payable: "<< billAmount*rooms[i].cust.payment_advance<<" baht ";
 
             rooms[i].status=0;
         }
@@ -490,18 +553,23 @@ int main(){
 }
 void welcome(){
     bluetext();
-    cout << "\n\n\n\t\t\t@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n";
-    cout <<       "\t\t\t@  ***********************************  @\n";
-    cout <<       "\t\t\t@  *                                 *  @\n";
-    cout <<       "\t\t\t@  *           WELCOME to            *  @\n";
-    cout <<       "\t\t\t@  *         La-lune-hotel           *  @\n";
-    cout <<       "\t\t\t@  *                                 *  @\n";
-    cout <<       "\t\t\t@  ***********************************  @\n";
-    cout <<       "\t\t\t@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n";
+    cout << "\n\n\n\t\t\t\t---------------------------------------------------\n";
+    cout <<       "\t\t\t\t|  *********************************************  |\n";
+    cout <<       "\t\t\t\t|  *                                           *  |\n";
+    cout <<       "\t\t\t\t|  *                                           *  |\n";
+    cout <<       "\t\t\t\t|  *                                           *  |\n";
+    cout <<       "\t\t\t\t|  *                WELCOME to                 *  |\n";
+    cout <<       "\t\t\t\t|  *                MAJA hotel                 *  |\n";
+    cout <<       "\t\t\t\t|  *                                           *  |\n";
+    cout <<       "\t\t\t\t|  *                                           *  |\n";
+    cout <<       "\t\t\t\t|  *                                           *  |\n";
+    cout <<       "\t\t\t\t|  *********************************************  |\n";
+    cout <<       "\t\t\t\t---------------------------------------------------\n";
     whitetext();
-    cout <<       "\n\n\t\t\t\t>";
+    cout <<       "\n\n\t\t\t\t            >";
     cout << "   Main menu \n";
     greentext();
-    cout << "\t\t      press enter in order to approach Main menu... ";
+    cout << "\t\t\t\t   press enter in order to approach Main menu... ";
     cin.get(); 
+
 }
