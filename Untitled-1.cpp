@@ -15,9 +15,7 @@ void darktext(){SetConsoleTextAttribute(hConsole, 8);  };
 using namespace std;
 
 bool Menupricelist = true;
-bool Menuhelp = true;
 int number;
-int help;
 //Class Customer
 class Customer
 {
@@ -381,7 +379,7 @@ void priceList(){
    
     system ("pause");
     mainofpricelist();
-    
+    getch();
     
         case 2:
     backtomainmenu();
@@ -391,52 +389,6 @@ void priceList(){
  
 
 }
-void backtomainmenu1(){
-    Menuhelp == false;
-}
-void mainofhelp(){
-    
-    system ("cls");
-    cout << "\t\tView of help\n\n";
-    cout << "1 - help\n\n";
-    cout << "2 - Back to Main menu\n\n";
-    cout << "Please select a number of page: ";
-    cin >> help;
-
-     
-}
-void helps(){
-    mainofhelp();
-    
-    switch(help){
-        case 1:
-        system ("cls");
-        cout << "\t\t\t\tHelp\n\n";
- 
-        cout << "To enter a new member into the system, Choose option 1 from the Main Menu.\n";
-        cout << "Enter the new members details into the membership form and press Y to save once finished.\n\n\n";
-
-        cout << "To view a price list, select option 2 from the main menu.\n\n\n";
-        
-        cout << "To create a new booking, select option 3 from the main menu.\n";
-        cout << "Enter the booking choices and then press Y to save the booking\n";
-        cout << "After create a new booking, can view detail of booking by typing the name of a file as it\n";
-        cout << "is displayed on the list to open and view it.\n\n\n";
-        
-        cout << "To view a bill payment, choose option 4 from the main menu\n";
-        cout << "To open a member or booking file, choose option 3 at the main menu.\n";
-        cout << "Type the name of a file as it is displayed on the list to open and view it.\n\n\n";
-    system ("pause");
-    mainofhelp();
-    
- case 2:
-    backtomainmenu1();
-    }
-    }
-
- 
-
- 
 
 void welcome();
 int main(){
@@ -466,9 +418,7 @@ int main(){
             cout<<endl;
             cout<<"\n\t\t\t6 - Guest Summary Report";
             cout<<endl;
-            cout<<"\n\t\t\t7 - Help";
-            cout<<endl;
-            cout<<"\n\t\t\t8 - Exit";
+            cout<<"\n\t\t\t7 - Exit";
             cout<<endl;
             cout<<"\n\n\t\t\tPlease choose an option : ";
             cin>>opt;
@@ -527,9 +477,6 @@ int main(){
                     hm.guestSummaryReport(); 
                     break;
                 case 7:
-                    helps();
-                    break;
-                case 8:
                     greentext();
                     cout<<"\n\t\tTHANK YOU! FOR RESERVATION";
                     break;
