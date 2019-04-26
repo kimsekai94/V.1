@@ -100,7 +100,7 @@ void Room::displayRoom(Room tempRoom)
 {
     cout<<"\n\t\tRoom Number : \t"<<tempRoom.roomNumber;
     cout<<"\n\t\tType AC/Non-AC (Yes=Y/No=N) : "<<tempRoom.ac;
-    cout<<"\n\t\tType Comfort (Single=S/Double=D) : "<<tempRoom.type;
+    cout<<"\n\t\tType Room (Single=S/Double=D) : "<<tempRoom.type;
     cout<<"\n\t\tType Size (Big=B/Small=S) : "<<tempRoom.stype;
     cout<<"\n\t\tRent : "<<tempRoom.rent;
 }
@@ -133,6 +133,7 @@ void HotelMgnt::guestSummaryReport(){
             cout<<"\n\t\t Enter Check Out Date (DD-MM-YY): "<<rooms[i].cust.to_date;
             greentext();
             cout<<"\n\t\t==================================================================="; 
+            whitetext();
         }
     
     }
@@ -141,6 +142,7 @@ void HotelMgnt::guestSummaryReport(){
 
 //hotel management reservation of room
 void HotelMgnt::checkIn(){
+    system("cls");
     int i,found=0,rno;
     class Room room;
     cout<<"\n\t\tEnter Room number : ";
@@ -151,12 +153,13 @@ void HotelMgnt::checkIn(){
             break;}
     }if(found==1){
         if(rooms[i].status==1){
+            redtext();
             cout<<"\n\t\tRoom is already Booked";
             getch();
             return;
         }
 
-        cout<<"\n\t\tEnter booking id(Number Only): ";
+        cout<<"\n\t\tEnter booking id(Number 4 digit): ";
         cin>>rooms[i].cust.booking_id;
 
         cout<<"\n\t\tEnter Customer Name (First Name): ";
@@ -183,13 +186,15 @@ void HotelMgnt::checkIn(){
         cout<<"\n\t\t Customer Checked-in Successfully..";
         
         getch();
+        
     }
 }
 
 
 //hotel management shows available rooms
 void HotelMgnt::getAvailRoom(){
-int i,found=0;
+    system("cls");
+    int i,found=0;
         for(i=0;i<count;i++){
             if(rooms[i].status==0){
                 displayRoom(rooms[i]);
@@ -203,12 +208,14 @@ int i,found=0;
             redtext();
         cout<<"\n\t\tAll rooms are reserved";
         getch();
+        
         }
 }
 
 
 //hotel management shows all persons that have booked room
 void HotelMgnt::searchCustomer(char *pname){
+    system("cls");
         int i,found=0;
         for(i=0;i<count;i++){
             if(rooms[i].status==1 && stricmp(rooms[i].cust.name,pname)==0){
@@ -224,13 +231,14 @@ void HotelMgnt::searchCustomer(char *pname){
             redtext();
         cout<<"\n\t\tPerson not found.";
         getch();
+        
         }
 }
 
 
 //hotel managemt generates the bill of the expenses
 void HotelMgnt::checkOut(int roomNum)
-{
+{       system("cls");
         int i,found=0,days,rno;
         float billAmount=0;
         for(i=0;i<count;i++){
@@ -251,6 +259,7 @@ void HotelMgnt::checkOut(int roomNum)
             cout<<"\t\t                CheckOut Details \n";
             whitetext();
             cout<<"\t\t=============================================\n";
+            cout<<"\n\t\tBooking ID : "<<rooms[i].cust.booking_id;
             cout<<"\n\t\tCustomer Name : "<<rooms[i].cust.name;
             cout<<"\n\t\tRoom Number : "<<rooms[i].roomNumber;
             cout<<"\n\t\tAddress : "<<rooms[i].cust.address;
@@ -264,6 +273,7 @@ void HotelMgnt::checkOut(int roomNum)
             rooms[i].status=0;
         }
     getch();
+    
 }
 
 
@@ -336,12 +346,19 @@ int main(){
             cout << "\t\t\t\tMain Menu\n\n";
             whitetext();
             cout<<"\n\t\t\t1 - Manage Rooms";
+            cout<<endl;
             cout<<"\n\t\t\t2 - Check-In Room";
+            cout<<endl;
             cout<<"\n\t\t\t3 - Available Rooms";
+            cout<<endl;
             cout<<"\n\t\t\t4 - Search Customer";
+            cout<<endl;
             cout<<"\n\t\t\t5 - Check-Out Room";
+            cout<<endl;
             cout<<"\n\t\t\t6 - Guest Summary Report";
+            cout<<endl;
             cout<<"\n\t\t\t7 - Exit";
+            cout<<endl;
             cout<<"\n\n\t\t\tPlease choose an option : ";
             cin>>opt;
             switch(opt){
