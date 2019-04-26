@@ -62,7 +62,7 @@ Room Room::addRoom(int rno)
     cin>>room.rent;
     room.status=0;
     greentext();
-    cout<<"\n\t\t Room Added Successfully!";
+    cout<<"\n\t\tRoom Added Successfully!";
     getch();
     return room;
 }
