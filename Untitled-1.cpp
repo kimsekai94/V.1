@@ -535,6 +535,7 @@ int main(){
                         cin>>rno;
                         hm.checkOut(rno);
                         
+                        
                     }
                     break;
                 case 6:
